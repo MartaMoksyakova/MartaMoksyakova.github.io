@@ -1,0 +1,33 @@
+<div class="container ">
+    <div class="row">
+        <div class="col-7">
+            <form *ngIf="isSignUpActive" (ngSubmit)="signUp(signUpForm.value)" [formGroup]="signUpForm">
+                <div class="form-group">
+                    <label for="signUpEmail">Електронна пошта</label>
+                    <input id="signUpEmail" formControlName="email" class="form-control" name="email" type="email" placeholder="Введіть  електронку">
+                    <div *ngIf="signUpForm.controls['email'].invalid && signUpForm.controls['email'].touched" class="alert alert-danger">Вкажіть коректно вашу електронну пошту</div>
+                </div>
+                <div class="form-group">
+                    <label for="signUpPassword">Пароль</label>
+                    <input id="signUpPassword" formControlName="password" class="form-control" name="password" type="password" placeholder="Введіть пароль">
+                </div>
+                <button type="submit" class="btn btn-block btn-success" [disabled]="!signUpForm.valid">Реєстрація</button>
+                <button type="button" class="btn btn-block btn-info" (click)="check()">Увійти</button>
+            </form>
+            <!-- ------------------------------------------------------------------------------- -->
+            <form *ngIf="!isSignUpActive" (ngSubmit)="login(loginForm.value)" [formGroup]="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Електронна пошта</label>
+                    <input id="loginEmail" formControlName="email" class="form-control" name="email" type="email" placeholder="Введіть електронну пошту">
+                    <div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched" class="alert alert-danger">Вкажіть коректно вашу електронну пошту</div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Пароль</label>
+                    <input id="loginPassword" formControlName="password" class="form-control" name="password" type="password" placeholder="Введіть пароль">
+                </div>
+                <button type="submit" class="btn btn-block btn-success" [disabled]="!loginForm.valid">Увійти</button>
+                <button type="button" class="btn btn-block btn-info" (click)="check()">Реєстрація</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<header>
+  <mat-sidenav-container class="sidenav-container">
+    <button mat-button class="menu-button" (click)="sidenav.toggle()">
+      <mat-icon>{{ isMenuOpen ? 'menu_open' : 'menu' }}</mat-icon>
+    </button>
+    <mat-sidenav
+    #sidenav 
+autoFocus="false" 
+mode="over" 
+[(opened)]="isMenuOpen" 
+class="sidenav" 
+(click)="onSidenavClick()"
+>
+      <li *ngFor="let category of cloudCategories" >
+      <a mat-button href="#" [routerLink]="['/product/' + category.name]">
+        {{ category.name | titlecase }}
+      <i class="fa fa-angle-double-right"></i>
+      </a>
+    </li>    
+    </mat-sidenav> 
+  </mat-sidenav-container>
+    <ul class="nav nav-pills">
+        <li class="nav_img">
+          <a class="img_style" [routerLink]="[ '/home' ]" routerLinkActive="active">
+  <img class="logo" src="../../../assets/keltons-srl-logo-1575557744.jpg" alt="">  
+</a>
+<div class="img_box"><img class="lviv" src="../../../assets/renome.png" alt=""></div>
+        </li>     
+        
+        <div class="main_menu flex">
+          <li class="nav-item" *ngFor="let category of cloudCategories">
+        <a class="nav-link" href="#" [routerLink]="['/product/' + category.name]" >
+        {{ category.name | titlecase }}
+      </a>
+    </li>
+        </div>
+
+        
+        <div class="icons">
+          <li class="nav-item contact">
+            <a class="btn" href="tel:093-1543760"><i class="fa fa-phone"></i></a> 
+          </li>
+            <li class=" basket">
+                <a class="nav-link" [routerLink]="[ '/basket' ]" routerLinkActive="active">
+                  <span class="basketPrice">
+                    <i class="fa fa-shopping-cart"></i>
+                    <i class="nav-bar__counter">
+                      {{ count }} 
+                    </i>
+                  </span>
+                </a>
+            </li>
+            <li class="icon">
+              <a class="nav-link" [routerLink]="[ '/admin' ]" routerLinkActive="active">
+                <i class="fa fa-user"></i></a>
+            </li> 
+        </div>
+
+          
+      </ul>
+      
+      
+</header>
+
+

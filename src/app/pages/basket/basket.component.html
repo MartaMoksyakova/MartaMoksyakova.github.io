@@ -1,0 +1,248 @@
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12" *ngIf="localProducts.length === 0">
+        <div class="sectionTitle fadeInTop d-flex flex-column justify-content-center align-items-center" style="min-height: 35vh">
+          <p>Кошик порожній.</p>
+          <a href="/home" style="color: #c80000">Продовжити покупки</a>
+        </div>
+      </div>
+      <div class="col-lg-12 mt-15" *ngIf="localProducts.length > 0">
+        <div class="row">
+          <div class="col-lg-12 col-lg-push-6 col-my-lt-12">
+            <div class="payItems smallSlideLeft animationDelay-1">
+              <div class="table">
+                <div class="tr thead">
+                  <div class="tr">
+                    <div class="td"></div>
+                    <div class="td">Товар</div>
+                    <!-- <div class="td">Розмір</div> -->
+                    <div class="td price">Ціна</div>
+                    <div class="td ">Кількість</div>
+                    <div class="td">Загалом</div>
+                  </div>
+                </div>
+                <div class="tr tbody">
+                  <div class="tr productOrder" *ngFor="let o of localProducts">
+                    <div class="td">
+                      <div class="delateProduct remove-cart-product-popup open-popup" (click)="deleteProduct(o)">
+                      </div>
+                    </div>
+                    <div class="td">
+                      <div class="smallProduct">
+                        <a class="imgWrapper" [style.backgroundImage]="'url('+ o.image +')'"></a>
+                        <div class="smallProductInfo">
+                          <h6 class="h6 as"><a>{{o.name}}</a>
+                          </h6>
+                          <p></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="td">
+                      <div class="singleItemPrice">
+                        <span>{{o.price}}</span><span>грн</span>
+                      </div>
+                    </div>
+                    <div class="td">
+                      <div class="productCountWrapper">
+                        <span class="productCount lessProduct" (click)="productCount(o,false)"></span>
+                        <input class="product-qty" maxlength="3" type="text" [value]="o.count">
+                        <span class="productCount moreProduct update-cart-product" (click)="productCount(o,true)"></span>
+                      </div>
+                    </div>
+                    <div class="td">
+                      <div class="itemPrice productPrice">
+                        <b class="tableMobTitle">Загалом: </b><span>{{o.count * o.price}}</span><span>грн</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tr tfoot">
+                  <div class="td">
+                    <div class="fullPrice cart-total">
+                      <!-- <div class="subFullPrice" style="display:none;">
+                        <span>299</span>
+                        <i>грн</i>
+                      </div> -->
+                      <div class="totalFullPrice" style="display:block;">
+                        <p>Загалом:</p>
+                        <span>{{totalPrice}}</span>
+                        <span>грн</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <div class="orders">
+              <h5 class= "style">Оформити замовлення</h5>
+              <mat-horizontal-stepper #stepper>
+                <mat-step [stepControl]="firstFormGroup" errorMessage="Некоректне ім'я.">
+                  <form [formGroup]="firstFormGroup" #orderForm="ngForm">
+                    <ng-template matStepLabel>Введіть прізвище та імя</ng-template>
+                    <mat-form-field>
+                      <mat-label >Прізвище та ім'я</mat-label>
+                      <input [(ngModel)]="order.userName"  matInput  formControlName="firstCtrl" minlength="3" maxlength="17" required
+                     pattern="[A-ZА-Я][a-zа-я]*?\s+[A-ZА-Я][a-zа-я]*?" >
+                    </mat-form-field>
+                    <div>
+                      <button mat-button matStepperNext>Далі</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <!-- <mat-step [stepControl]="secondFormGroup" errorMessage="Некоректна адреса.">
+                  <form [formGroup]="secondFormGroup">
+                    <ng-template matStepLabel>Введіть адресу</ng-template>
+                    <mat-form-field>
+                      <mat-label>Адреса</mat-label>
+                      <input [(ngModel)]="order.userAdress" placeholder="Шевченка 12/32"  matInput  formControlName="secondCtrl"
+                             required pattern="[A-ZА-Я][a-zа-я]*?\s\d+(/\d{1,3})?" >
+                    </mat-form-field> 
+                    <div>
+                      <button mat-button matStepperPrevious>Назад</button>
+                      <button mat-button matStepperNext>Далі</button>
+                    </div>
+                  </form>
+                </mat-step> -->
+                <mat-step [stepControl]="thirdFormGroup" errorMessage="Некоректний телефон.">
+                  <form [formGroup]="thirdFormGroup">
+                    <ng-template  matStepLabel>Введіть телефон</ng-template>
+                    <mat-form-field>
+                      <mat-label>Телефон</mat-label>
+                      <input [textMask]="{ mask: phoneMask }" [(ngModel)]="order.userPhone"  matInput  formControlName="thirdCtrl"
+                             required  >
+                    </mat-form-field>
+                    <div>
+                      <button mat-button matStepperPrevious>Назад</button>
+                      <button mat-button matStepperNext>Далі</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step>
+                  <ng-template matStepLabel>Підтвердити замовлення</ng-template>
+                  <div>
+                    <button mat-button (click)="stepper.reset()">Відмінити</button>
+                    <button (click)="addOrder(orderForm)" (click)="showAlert()" [disabled]="orderForm.invalid" mat-button>Оформити</button>
+            
+                  </div>
+                </mat-step>
+                <div class="alert" [class.visible]="isVisible"> 
+              
+                  <div class="align" >
+                    <div class="ic">
+                     
+                  <p class="basket_text" >Товар додано в корзину</p>
+                  </div>
+                  </div>
+                  </div>
+              </mat-horizontal-stepper>
+            </div>
+            
+            
+            
+            <div class="phone_container">
+              <div class="col-lg-12" *ngIf="localProducts.length === 0">
+                <div class="sectionTitle fadeInTop d-flex flex-column justify-content-center align-items-center" style="min-height: 35vh">
+                  <p>Кошик порожній.</p>
+                  <a href="/home" style="color: #c80000">Продовжити покупки</a>
+                </div>
+              </div>
+              <div class="col-lg-12 mt-15" *ngIf="localProducts.length > 0">
+                  <div class="tr productOrder" *ngFor="let o of localProducts">
+                    <div class="td ">
+                      <div class="delateProduct remove-cart-product-popup open-popup" (click)="deleteProduct(o)">
+                      </div>
+                    </div>
+                    <div class="td">
+                      <div class="smallProduct">
+                        <a class="imgWrapper" [style.backgroundImage]="'url('+ o.image +')'"></a>
+                        <div class="smallProductInfo">
+                          <h6 class="h6 as"><a>{{o.name}}</a>
+                          </h6>
+                          
+                        </div>
+                      </div>
+                      <div class="td">
+                        <div class="singleItemPrice">
+                        <span>Ціна:</span>  <span > {{o.price}}</span><span>грн</span>
+                        </div>
+                      </div>
+                      <div class="td">
+                        <div class="productCountWrapper">
+                          <span class="productCount lessProduct" (click)="productCount(o,false)"></span>
+                          <input class="product-qty" maxlength="3" type="text" [value]="o.count">
+                          <span class="productCount moreProduct update-cart-product" (click)="productCount(o,true)"></span>
+                        </div>
+                      </div>
+                      <div class="td">
+                        <div class="itemPrice productPrice flex">
+                          <p class="singleItemPrice " >Загалом: </p><p class="priceT"> <span >{{o.count * o.price}}</span><span>грн</span></p> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tr tfoot">
+                    <div class="td">
+                      <div class="fullPrice cart-total">
+                        <!-- <div class="subFullPrice" style="display:none;">
+                          <span>299</span>
+                          <i>грн</i>
+                        </div> -->
+                        <div class="totalFullPrice" style="display:flex; flex-direction: row; margin-left: 34px;">
+                          <p class="priceT">Загальна сума:</p>
+                          <div class="priceT"><span class="red">{{totalPrice}}</span>
+                            <span class="red">грн</span></div>
+                          
+                        </div>
+  <h5 class= "style">Оформити замовлення</h5>
+  <mat-vertical-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Некоректне ім'я.">
+      <form [formGroup]="firstFormGroup" #orderForm="ngForm">
+        <ng-template matStepLabel>Введіть прізвище та імя</ng-template>
+        <mat-form-field>
+          <mat-label >Прізвище та ім'я</mat-label>
+          <input [(ngModel)]="order.userName"  matInput  formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Далі</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="Некоректна адреса.">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Введіть адресу</ng-template>
+        <mat-form-field>
+          <mat-label>Адреса</mat-label>
+          <input [(ngModel)]="order.userAdress"  matInput  formControlName="secondCtrl"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Назад</button>
+          <button mat-button matStepperNext>Далі</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="Некоректний телефон.">
+      <form [formGroup]="secondFormGroup">
+        <ng-template  matStepLabel>Введіть телефон</ng-template>
+        <mat-form-field>
+          <mat-label>Телефон</mat-label>
+          <input [textMask]="{ mask: phoneMask }" [(ngModel)]="order.userPhone"  matInput  formControlName="secondCtrl"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Назад</button>
+          <button mat-button matStepperNext>Далі</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Підтвердити замовлення</ng-template>
+      <div>
+        <button mat-button (click)="stepper.reset()">Відмінити</button>
+        <button (click)="addOrder(orderForm)" (click)="showAlert()" [disabled]="orderForm.invalid" mat-button>Оформити</button>
+
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+ 

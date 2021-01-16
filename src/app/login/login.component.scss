@@ -1,0 +1,25 @@
+.container{
+    padding-top: 10%;
+    width: 100%;
+    @media screen and (max-width: 426px) {
+        padding-top: 30%; 
+      }
+      @media screen and (min-width: 427px) and (max-width: 768px) {
+        padding-top: 18%; 
+      }
+}
+form{
+    width: 100%;
+}
+.col-3{
+    width: 100%;
+}
+.btn-info {
+    background-color: black;
+}
+.btn-success{
+    background-color: black;
+}
+label{
+    font-weight: 600;;
+}

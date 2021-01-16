@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 mt-15">
+      <div class="row">
+        <div class="col-lg-12 col-lg-push-6 col-my-lt-12">
+          <div class="payItems smallSlideLeft animationDelay-1">
+            <div class="table">
+              <div class="tr thead">
+                <div class="tr">
+                  <div class="td"></div>
+                  <div class="td">Товар</div>
+                  <div class="td">Загальна сума</div>
+                  <div class="td">Імя</div>
+                  <div class="td">телефон</div>
+                  <!-- <div class="td">Адреса</div> -->
+                  <div class="td">Замовлення</div> 
+                  <div class="td">Дата</div>
+                </div>
+              </div>
+              <div class="tr tbody">
+                <div class="tr productOrder" *ngFor="let o of cloudOrders,let i = index">
+                  <div class="td">
+                    <div class="delateProduct remove-cart-product-popup open-popup" (click)="deleteOrder(o)">
+                    </div>
+                  </div>
+                  <div class="td container_sm">
+                    <div class="smallProduct" *ngFor="let product of o.ordersDetails">
+                      <a class="imgWrapper" [style.backgroundImage]="'url('+ product.image +')'"></a>
+                    </div>
+                  </div>
+                  <div class="td">
+                    <div class="itemPrice productPrice">
+                      <b class="tableMobTitle"></b><span>{{ o.totalPayment  }} </span><i>грн</i>
+                    </div>
+                  </div>
+                  <div class="td">
+                    <div class="singleItemPrice">
+                      <span>{{o.userName}}</span>
+                    </div>
+                  </div>
+                  <div class="td">
+                    <div class="singleItemPrice">
+                      <span>{{o.userPhone}}</span>
+                    </div>
+                  </div>
+                  <!-- <div class="td">
+                    <div class="Adress">
+                       {{ o.userAdress }}
+                    </div>
+                  </div> -->
+                  <div class="td">
+                    <div class="Order">
+                      <p *ngFor="let product of o.ordersDetails">
+                        {{ product.name | titlecase }}
+                        {{ product.count }} шт
+                      </p>
+                    </div>
+                  </div>          
+                  <div class="td">
+                    <div class="singleItemPrice">
+                      <span>{{ o.date | date: "shortDate" }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+</div>

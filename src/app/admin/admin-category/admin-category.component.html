@@ -1,0 +1,34 @@
+
+
+   <form [formGroup]="addCategoryForm" class="border-0 " (ngSubmit)="addCategory()">
+    <div class="form-group">
+      <div class="form-group">
+        <label for="name">Категорія</label>
+        <input [(ngModel)]="name" name="name" formControlName="name" placeholder="Назва категорії"   type="text"  class="form-control">
+      </div>
+      <div [hidden]="!checkName(addCategoryForm)" class="alert alert-danger">Таке ім'я вже існує</div>
+      <button  class="btn btn-success" >Добавити</button>
+  
+      </div>
+  </form>
+  <div class="container">
+  <div class=" row ">
+    <div class="col-7  ">
+  <table class="table table-dark table-sm"  >
+    <thead>
+      <th>#</th>
+      <th>Назва категорії</th>
+      <th>Видалити</th>
+    </thead>
+      <tbody>
+        <tr class="text" *ngFor="let cat of adminCategory, let i = index" >
+          <td>{{cat.id}}</td>
+          <td> {{cat.name}}</td>
+          <td><button type="button" class="btn btn-danger m-2" (click)="deleteCategory(cat)">Видалити</button></td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  </div>

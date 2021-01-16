@@ -1,0 +1,75 @@
+.container{
+    margin-top: 5%;
+}
+.form-control{
+    color: black;
+}
+.btn-success, .btn{
+    // width: 30%;
+    color: black;
+    border: 2px solid #000;
+    background-color: white;
+    margin-top: 5%;
+    
+}
+.btn-success{
+    margin-left: 85%;
+    width: 15%;
+    background-color: black;
+    color: white;
+    
+}
+table{
+    background-color: black;
+    color: white;
+}
+.smallProduct .imgWrapper {
+    // position: absolute;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 90px;
+    height: 90px;
+    margin-left: 5px;
+    display: block;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    -webkit-transition: opacity .250s linear;
+    -o-transition: opacity .250s linear;
+    transition: opacity .250s linear;
+  }
+  .custom-pagination .page-number {
+    display: inline-block;
+    // margin-top: 20%;
+    border-radius: 50%;
+    align-items: center;
+
+  }
+  .page-number.current {
+    background: #ffffff !important;
+    border: 2px solid black;
+  }
+  
+  .page-number span {
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: "Oswald", sans-serif;
+
+  }
+  
+  .pagination-previous,
+  .pagination-next {
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  select{
+    width: 10%;
+  }

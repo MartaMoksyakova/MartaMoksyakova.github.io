@@ -1,0 +1,41 @@
+.container-fluid{
+    padding-top: 10%;
+    @media screen and (max-width: 426px) {
+        padding-top: 25%;
+      }
+}
+.nav-pills .nav-link.active{
+    background-color: black;
+}
+a{
+    color: black;
+}
+.btn{
+    width: 30%;
+    margin-left: 70%;
+    background-color: black;
+    color: white;
+    font-size: 17px;
+    border: 1px solid black;
+    margin-top: 5px;
+}
+.col-3{
+    @media screen and (max-width: 426px) {
+        max-width: 75%; 
+      }
+}
+.row{
+    @media screen and (max-width: 426px) {
+        flex-direction: column;
+      }
+}
+form{
+    @media screen and (max-width: 426px) {
+        width: 95%;
+      }
+}
+.col-9{
+    @media screen and (max-width: 426px) {
+        max-width: 95%; 
+      }
+}

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kelton-project": {
+      "hosting": {
+        "KeltonProject": [
+          "kelton-project"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kelton-project"
+  }
+}

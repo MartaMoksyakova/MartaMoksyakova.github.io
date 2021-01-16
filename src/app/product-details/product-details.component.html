@@ -1,0 +1,141 @@
+<div class="laberBreadcrumb d-flex row">
+      
+  <div class="container">
+<nav  class="breadcrumb hidden-sm-down">
+<ol >   
+  <li>
+    <a class="img_style" [routerLink]="[ '/home' ]" routerLinkActive="active">
+      <span class="span" >Головна</span>
+    </a>
+  </li>  
+  <li >
+  <i (click)="backToProducts()" class="fa fa-arrow-left"></i>
+  </li>
+
+
+</ol>
+</nav>
+</div>
+
+</div>
+<div class="container">
+  <div class="fluid_img  d-flex    flex-column " >
+    <div class="images-container" >
+    <div class="card-main"> 
+          <div class="img_style" *ngIf="product">
+            <img src={{product.image[0]}} [style.image] = '"url("+image+")"' tabindex="0"   >
+           
+          </div>      
+      </div>
+      <div class="img_arr  " *ngIf="product" >
+        <div class="img">
+          <img  class="img_first" src={{product.image[1]}}  tabindex="0" >  
+        </div>
+        <div class="img">
+          <img class="img_first" src={{product.image[2]}} tabindex="0"  >
+        </div>
+        <div class="img">
+          <img  class="img_first" src={{product.image[3]}}  tabindex="0" >
+        </div>
+      </div>
+        </div>      
+  </div>
+    <div class="prod_details">
+<div class="card-body col-md-25" *ngIf="product"  >
+          <h1 class="card-title">{{product.name}}</h1>
+          <!-- <h4>Ціна</h4>  -->
+          <div class="card-text"> 
+            <h4>{{product.price|currency: 'UAH' }} </h4></div>
+            <p *ngIf="product.size"  class="description">Доступні розмірa:</p>
+            <div class="size d-flex flex-row">
+              <!-- <li class="input-container pull-xs-left  " >
+                <input class="input-radio" type="radio" >
+                <span class="radio-label">{{product.size}} </span>
+              </li> -->
+
+              <input class="input-radio" type="radio" >
+                <span class="radio-label">{{product.size}} </span>
+              <!-- <li class="input-container pull-xs-left  ">
+                <input class="input-radio" type="radio" >
+                <span class="radio-label">{{product.size[1]}} </span>
+              </li>
+              <li class="input-container pull-xs-left  ">
+                <input class="input-radio" type="radio" >
+                <span class="radio-label">{{product.size[2]}} </span>
+              </li>
+              <li class="input-container pull-xs-left  ">
+                <input class="input-radio" type="radio" >
+                <span class="radio-label">{{product.size[3]}} </span>
+              </li>
+              <li class="input-container pull-xs-left  ">
+                <input class="input-radio" type="radio" >
+                <span class="radio-label">{{product.size[4]}} </span>
+              </li>
+              <li class="input-container pull-xs-left  ">
+                <input class="input-radio" type="radio" >
+                <span class="radio-label">{{product.size[5]}} </span>
+              </li>
+              <li class="input-container pull-xs-left  ">
+                <input class="input-radio" type="radio" >
+                <span class="radio-label">{{product.size[6]}} </span>
+              </li>
+              <li class="input-container pull-xs-left  ">
+                <input class="input-radio" type="radio" >
+                <span class="radio-label">{{product.size[7]}} </span>
+              </li> -->
+            </div>
+            <div class="product__cart">
+              <div class="description">
+                <p class="description">Кількість:</p>
+                <button
+                  mat-button
+                  class="product__btn-count"
+                  (click)="productCount(product, true)"
+                >
+                  <mat-icon> + </mat-icon>
+                </button>
+                <input type="number" class="product__input" [value]="product.count" />
+                <button
+                  mat-button
+                  class="product__btn--count"
+                  (click)="productCount(product, false)"
+                >
+                  <mat-icon> - </mat-icon>
+                </button>
+              </div>
+            </div>
+            <!-- <input type="checkbox" class="style d-flex flex-row">{{product.size}} -->
+          <p class="description">Опис : </p>
+            <p class="description_p">
+            {{product.description}}
+          
+          </p>
+          
+        <button class="btn" (click)="addToBasket(product)" (click)="showAlert()" ><span class="text_btn">Додати в корзину</span></button>
+        
+    </div>
+    
+</div>
+<div class="alert" [class.visible]="isVisible"> 
+  
+  <div class="align" *ngIf="product" >
+    <div class="ic">
+      <p class="basket_name">{{product.name}}</p>
+      <a class="nav-link fa" [routerLink]="[ '/basket' ]" routerLinkActive="active"><i class="fa fa-angle-double-right"></i></a>
+    </div>
+    
+    <p class="basket_price">
+      {{product.price|currency: 'UAH' }}
+    </p>
+  </div>
+  <hr>
+  <div class="flex row" *ngIf="product" >
+    <img class="basket_img"  src={{product.image[0]}} [style.image] = '"url("+image+")" '  >
+  <p class="basket_text" >Товар додано в корзину</p>
+  </div>
+  
+</div>
+
+
+   
+         
